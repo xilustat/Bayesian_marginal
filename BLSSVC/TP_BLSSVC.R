@@ -39,7 +39,7 @@ FP_eta <- c()
 for (i in 1:30) 
 {
   
-n = 100; p = 500; q2=4; max.steps = 10000;
+n = 200; p = 50; q2=4; max.steps = 10000;
 dat = data(n,p)
 e=dat$e; c=dat$c; g=dat$g; xx=dat$xx; y=dat$y; beta_true=dat$coef_g; eta_true=dat$coef;
 

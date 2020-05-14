@@ -4,15 +4,15 @@ LADBLSSVC = function(e,c,x,w, y, max.steps)
   n <- length(y)
   q1 <- ncol(c)
   q2 <- ncol(e)
-  a1 = 0.1
-  b1 = 0.1
-  c1 = 0.1
-  d1 = 0.1
-  c2 = 0.1
-  d2 = 0.1
-  r1 = 1
+  a1 = 1 #tau(prior) ~ gamma(a1,b1)
+  b1 = 1
+  c1 = 1 #eta2_1(prior) ~ gamma(c1,d1)
+  d1 = 1
+  c2 = 1 #eta2_2(prior) ~ gamma(c2,d2)
+  d2 = 1
+  r1 = 1 #pi_1(prior) ~ beta(r1,u1)
   u1 = 1
-  r2 = 1
+  r2 = 1 #pi_2(prior) ~ beta(r2,u2)
   u2 = 1
   pi_1 = 1/2
   pi_2 = 1/4
@@ -20,17 +20,17 @@ LADBLSSVC = function(e,c,x,w, y, max.steps)
   v = rep(1,n)
   s1 = 1
   s2 = rep(1,q2)
-  beta = 1
-  eta = rep(1,q2)
-  b0 = 1
-  alpha0 = 1
+  beta = 1 # coeffecient of gene
+  eta = rep(1,q2) # coeffecient of GXE interaction 
+  b0 = 1 #b(prior)~n(0,b0)
+  alpha0 = 1 #alpha(prior)~n(0,alpha0)
   tau = 1
   theta = 0.5
   e2 = 2/(theta*(1-theta))
   eta2_1 = 1
   eta2_2 = 1
-  b = rep(1,q1)
-  alpha = rep(1,q2)
+  b = rep(1,q1) # coeffecient of clinical factor
+  alpha = rep(1,q2) # coeffecient of environmental factor
   
   betaSamples <- matrix(0,max.steps,1)
   bSamples <- matrix(0,max.steps,q1)

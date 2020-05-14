@@ -14,7 +14,7 @@ data <- function(n,p)
   {
     for (j in 1: q1)
     {
-      sig1[i,j] = 0.2^abs(i-j)
+      sig1[i,j] = 0.5^abs(i-j)
     }           
     
   }
@@ -33,7 +33,7 @@ data <- function(n,p)
   {
     for (j in 1: q2)
     {
-      sig2[i,j] = 0.2^abs(i-j)
+      sig2[i,j] = 0.5^abs(i-j)
     }           
     
   }
@@ -51,7 +51,7 @@ data <- function(n,p)
   {
     for (j in 1: p)
     {
-      sig3[i,j] = 0.2^abs(i-j)
+      sig3[i,j] = 0.5^abs(i-j)
     }           
     
   }
@@ -77,7 +77,7 @@ data <- function(n,p)
   xx <- scale(xx)
  
   #y
-  err = rnorm(n) #err = rt(n,df=2)
+  err = rnorm(n)
   
   coef_xx = runif(12,1.8,2.5) 
   

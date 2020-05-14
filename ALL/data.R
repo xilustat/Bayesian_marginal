@@ -77,7 +77,7 @@ data <- function(n,p)
   xx <- scale(xx)
  
   #y
-  err = rnorm(n)
+  err = rnorm(n) #err = rt(n,df=2)
   
   coef_xx = runif(12,1.8,2.5) 
   

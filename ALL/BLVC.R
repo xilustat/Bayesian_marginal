@@ -4,15 +4,15 @@ BLVC = function(e,c,x,w, y, max.steps)
   n <- length(y)
   q1 <- ncol(c)
   q2 <- ncol(e)
-  a1 = 1
-  b1 = 1.78
-  a2 = 1
+  a1 = 1 #lambda2_c (prior)~ gamma(a1,b1)
+  b1 = 1
+  a2 = 1 #lambda2_e (prior)~ gamma(a2,b2)
   b2 = 1
   
-  beta = 1
-  b = rep(1,q1)
-  alpha = rep(1,q2)
-  eta = rep(1,q2)
+  beta = 1 # coeffecient of gene
+  b = rep(1,q1) # coeffecient of clinical factor
+  alpha = rep(1,q2) # coeffecient of environmental factor
+  eta = rep(1,q2) # coeffecient of GXE interaction 
   invtau2_c = 1
   invtau2_e = rep(1,q2)
   lambda2_c = 1

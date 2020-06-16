@@ -1,0 +1,21 @@
+0615
+
+(1) The current setting: n=200, p=50, coef = unif(0.1,0.5), coefficients are "far away from each other", error = n(0,1) and t(2).
+
+(2) based on the setting in (1), please also calculate AUC(SD) under other heavy tailed distributions:  Laplace(mu,b) with 
+mean mu=0 and scale parameter b=2, and LogNormal(0,1). So now you have AUC(SD) for 4 error distributions
+
+(3) based on the setting in (2), change p from 50 to 500 and 1000, respectively. 
+
+(4) based on the setting in (1), change coefficients to "close to each other", error = n(0,1) and t(2).
+
+(5) based on the setting in (2), change coefficients to "close to each other"
+
+(6) based on the setting in (3), change coefficients to "close to each other"
+
+Summarize results in table. Just report AUC with SD. No need to draw ROC for each case.
+
+
+
+
+

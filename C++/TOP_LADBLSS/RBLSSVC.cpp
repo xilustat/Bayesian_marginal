@@ -48,7 +48,7 @@ Rcpp::List RBLSSVC (arma::vec x, arma::vec y, arma:: mat w, arma:: mat c, arma::
         gsAlpha.row(k) = hatAlpha.t();
         
         
-        // Rcpp::Rcout << "alpha" << std::endl;
+        // Rcpp::Rcout << "b" << std::endl;
         
         tCCoV = (c.each_col()/hatV).t() * c;
         res += c*hatb;
@@ -79,25 +79,48 @@ Rcpp::List RBLSSVC (arma::vec x, arma::vec y, arma:: mat w, arma:: mat c, arma::
         gsV.row(k) = hatV.t();
         
         
+        // Rcpp::Rcout << "beta" << std::endl;
+        res += x * hatBeta;
         XgXgoV1 = arma::as_scalar((x/hatV).t() * x);
         varG1 = 1/(XgXgoV1*hatTau/xi2Sq + 1/hatSg1);
                    
         RXjToV = arma::sum(x % (res/hatV))*hatTau/xi2Sq;
         meanG1 = varG1 * RXjToV;
-        double lj_temp = std::sqrt(hatSg1)*std::exp(0.5*varG1*pow(RXjToV,2))/std::sqrt(varG1);
+        double lj_temp = (1/std::sqrt(hatSg1))*std::exp(0.5*varG1*pow(RXjToV,2))*std::sqrt(varG1);
         lj = hatPiBeta/(hatPiBeta+(1-hatPiBeta)*lj_temp);
         t = R::runif(0,1);
         if(t<lj){
-            hatBeta =R::rnorm(meanG1, sqrt(varG1));sg1=1;
-        }else{
             hatBeta = 0;sg1=0;
-            
+        }else{
+            hatBeta =R::rnorm(meanG1, sqrt(varG1));sg1=1;
         }
         
         res -= x * hatBeta;
         
         gsBeta(k) = hatBeta;
       
+        for(unsigned int j=0; j<q1; j++){
+            res += w.col(j) * hatEta(j);
+            XgXgoV2 = arma::as_scalar((w.col(j)/hatV).t() * w.col(j));
+            varG2 = 1/(XgXgoV2*hatTau/xi2Sq + 1/hatSg2(j));
+                      
+            WXjToV = arma::sum(w.col(j) % res / hatV)* hatTau/xi2Sq;
+            meanG2 = varG2 * WXjToV;
+                      
+            double lg_temp =1/(std::sqrt(hatSg2(j)))*std::exp(0.5*varG2*pow(WXjToV,2))*std::sqrt(varG2);
+            lg = hatPiEta/(hatPiEta+(1-hatPiEta)*lg_temp);
+            t = R::runif(0, 1);
+            if(t<lg){
+                 hatEta(j) = 0;sg2(j)=0;
+            }else{
+                hatEta(j) = R::rnorm(meanG2,sqrt(varG2));sg2(j)=1;
+            }
+            res -= w.col(j) * hatEta(j);
+        }
+        gsEta.row(k) = hatEta.t();
+        
+        
+        
                 // Rcpp::Rcout << "S1" << std::endl;
         muS1 = std::sqrt(hatEtaSq1/ pow(hatBeta,2));
 
@@ -123,27 +146,7 @@ Rcpp::List RBLSSVC (arma::vec x, arma::vec y, arma:: mat w, arma:: mat c, arma::
 
     
         
-     for(unsigned int j=0; j<q1; j++){
-        res += w.col(j) * hatEta(j);
-        XgXgoV2 = arma::as_scalar((w.col(j)/hatV).t() * w.col(j));
-        varG2 = 1/(XgXgoV2*hatTau/xi2Sq + 1/hatSg2(j));
-                  
-        WXjToV = arma::sum(w.col(j) % res / hatV)* hatTau/xi2Sq;
-        meanG2 = varG2 * WXjToV;
-                  
-        double lg_temp =std::sqrt(hatSg2(j))*std::exp(-0.5*varG2*pow(WXjToV,2))/std::sqrt(varG2);
-        lg = hatPiEta/(hatPiEta+(1-hatPiEta)*lg_temp);
-        t = R::runif(0, 1);
-        if(t<lg){
-            hatEta(j) = R::rnorm(meanG2,sqrt(varG2));sg2(j)=1;
-        }else{
-            hatEta(j) = 0;sg2(j)=0;
-        }
-        res -= w.col(j) * hatEta(j);
-    }
-    gsEta.row(k) = hatEta.t();
-        
-         // Rcpp::Rcout << "S1 " << std::endl;
+         // Rcpp::Rcout << "S2 " << std::endl;
         muS2 = std::sqrt(hatEtaSq2)/ arma::abs(hatEta);
         for(unsigned int j = 0; j<q1; j++){
             if(hatEta(j) == 0){
@@ -187,15 +190,15 @@ Rcpp::List RBLSSVC (arma::vec x, arma::vec y, arma:: mat w, arma:: mat c, arma::
         gsEtaSq2(k) = hatEtaSq2;
         
         // Rcpp::Rcout << "pi1" << std::endl;
-        double shape11 = sh1 + sg1;
-        double shape21 = sh0 + 1-sg1;
+        double shape11 = sh1 + 1-sg1;
+        double shape21 = sh0 + sg1;
         hatPiBeta = R::rbeta(shape11, shape21);
         gsPiBeta(k) = hatPiBeta;
         
         
         // Rcpp::Rcout << "pi2" << std::endl;
-        double shape12 = sh1 + arma::accu(hatEta != 0);
-        double shape22 = sh0 + arma::accu(hatEta == 0);
+        double shape12 = sh1 + arma::accu(hatEta == 0);
+        double shape22 = sh0 + arma::accu(hatEta != 0);
         hatPiEta = R::rbeta(shape12, shape22);
         gsPiEta(k) = hatPiEta;
         

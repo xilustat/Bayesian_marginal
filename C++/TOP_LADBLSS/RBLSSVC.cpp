@@ -107,7 +107,7 @@ Rcpp::List RBLSSVC (arma::vec x, arma::vec y, arma:: mat w, arma:: mat c, arma::
             WXjToV = arma::sum(w.col(j) % res / hatV)* hatTau/xi2Sq;
             meanG2 = varG2 * WXjToV;
                       
-            double lg_temp =1/(std::sqrt(hatSg2(j)))*std::exp(0.5*varG2*pow(WXjToV,2))*std::sqrt(varG2);
+            double lg_temp =(1/std::sqrt(hatSg2(j)))*std::exp(0.5*varG2*pow(WXjToV,2))*std::sqrt(varG2);
             lg = hatPiEta/(hatPiEta+(1-hatPiEta)*lg_temp);
             t = R::runif(0, 1);
             if(t<lg){

@@ -31,7 +31,7 @@ for(i in 1:30)
     max.steps=10000
     x=g[,j]; w=xx[,((q2*(j-1)+1):(j*q2))]
     hatAlpha = rep(1,q2); hatb = rep(1,3); hatEta= rep(1,q2); hatBeta=1; hatTau=1; hatV = rep(1,n)
-    invSigAlpha0= diag(rep(10^-3,q2)); invSigb0 = diag(rep(10^(-3),3))
+    invSigAlpha0= diag(rep(1,q2)); invSigb0 = diag(rep(1,3))
     hatSg1=1; hatSg2 = rep(1,q2); hatEtaSq1=1; hatEtaSq2=1
     xi1=0; xi2=0.5; r1=1; r=1; a=1; b=1; sg1=1; sg2 = rep(1,q2)
     hatPiBeta=1/2; hatPiEta=1/2

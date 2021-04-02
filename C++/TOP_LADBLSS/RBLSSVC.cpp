@@ -98,6 +98,7 @@ Rcpp::List RBLSSVC (arma::vec x, arma::vec y, arma:: mat w, arma:: mat c, arma::
         res -= x * hatBeta;
         
         gsBeta(k) = hatBeta;
+        gsSS1(k) = sg1;
       
         for(unsigned int j=0; j<q1; j++){
             res += w.col(j) * hatEta(j);
@@ -118,7 +119,7 @@ Rcpp::List RBLSSVC (arma::vec x, arma::vec y, arma:: mat w, arma:: mat c, arma::
             res -= w.col(j) * hatEta(j);
         }
         gsEta.row(k) = hatEta.t();
-        
+        gsSS2.row(k) = sg2.t();
         
         
                 // Rcpp::Rcout << "S1" << std::endl;

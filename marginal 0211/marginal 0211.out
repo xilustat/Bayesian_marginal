@@ -1,0 +1,22 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Method}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Bayesian formulation of the LAD regerssion}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Bayesian LAD LASSO with spike-and-slab priors}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{ The Gibbs sampler for robust marginal GE analysis }{section.2}% 5
+\BOOKMARK [1][-]{section.3}{Simulation}{}% 6
+\BOOKMARK [1][-]{section.4}{Real Data Analysis}{}% 7
+\BOOKMARK [1][-]{section.5}{Discussion}{}% 8
+\BOOKMARK [1][-]{appendix.A}{Additional simulation results}{}% 9
+\BOOKMARK [2][-]{subsection.A.1}{Identification results in simulation}{appendix.A}% 10
+\BOOKMARK [1][-]{appendix.B}{Assessment of the convergence of MCMC chains}{}% 11
+\BOOKMARK [1][-]{appendix.C}{Estimation results for data analysis}{}% 12
+\BOOKMARK [1][-]{appendix.D}{Posterior inference}{}% 13
+\BOOKMARK [2][-]{subsection.D.1}{LADBL}{appendix.D}% 14
+\BOOKMARK [3][-]{subsubsection.D.1.1}{Hierarchical model specification}{subsection.D.1}% 15
+\BOOKMARK [3][-]{subsubsection.D.1.2}{Gibbs Sampler}{subsection.D.1}% 16
+\BOOKMARK [2][-]{subsection.D.2}{BLSS}{appendix.D}% 17
+\BOOKMARK [3][-]{subsubsection.D.2.1}{Hierarchical model specification}{subsection.D.2}% 18
+\BOOKMARK [3][-]{subsubsection.D.2.2}{Gibbs Sampler}{subsection.D.2}% 19
+\BOOKMARK [2][-]{subsection.D.3}{BL}{appendix.D}% 20
+\BOOKMARK [3][-]{subsubsection.D.3.1}{Hierarchical model specification}{subsection.D.3}% 21
+\BOOKMARK [3][-]{subsubsection.D.3.2}{Gibbs Sampler}{subsection.D.3}% 22
